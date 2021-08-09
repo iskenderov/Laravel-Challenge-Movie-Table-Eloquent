@@ -22,20 +22,20 @@
                             @foreach ($movies as $movie)
                                 <tr>
                                     <td>{{ $loop->iteration }}. {{ $movie->title }}</td>
-                                    <td>{{ $movie->category->name }}</td>
+                                    <td>{{ $movie->category_name }}</td>
                                     <td>{{ $movie->release_year }}</td>
                                     <td>
-                                        @if($movie->ratings_avg_rating)
+                                        @if(isset($movie->ratings_avg_rating))
                                             {{ number_format($movie->ratings_avg_rating, 2) }}
                                         @else
-                                            {{ number_format($movie->ratings->avg('rating'), 2) }}
+                                            {{ number_format($movie->ratings_avg, 2) }}
                                         @endif
                                     </td>
                                     <td>
-                                        @if($movie->ratings_count)
+                                        @if(isset($movie->ratings_count))
                                             {{$movie->ratings_count}}
                                         @else
-                                            {{ $movie->ratings->count() }}
+                                            {{ $movie->ratings_cnt }}
                                         @endif
                                     </td>
                                 </tr>
