@@ -24,8 +24,20 @@
                                     <td>{{ $loop->iteration }}. {{ $movie->title }}</td>
                                     <td>{{ $movie->category->name }}</td>
                                     <td>{{ $movie->release_year }}</td>
-                                    <td>{{ number_format($movie->ratings->avg('rating'), 2) }}</td>
-                                    <td>{{ $movie->ratings->count() }}</td>
+                                    <td>
+                                        @if($movie->ratings_avg_rating)
+                                            {{ number_format($movie->ratings_avg_rating, 2) }}
+                                        @else
+                                            {{ number_format($movie->ratings->avg('rating'), 2) }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($movie->ratings_count)
+                                            {{$movie->ratings_count}}
+                                        @else
+                                            {{ $movie->ratings->count() }}
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
